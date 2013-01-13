@@ -1,0 +1,23 @@
+def sieve(n):
+    last=(n-1)/2
+    isprime=[True]*(last+1)
+    
+    isprime[0]=False
+    i=1
+    while (2*i+1)*(2*i+1)<=n:
+        if isprime[i]==True:
+            m=2*i+1
+            for j in xrange(3*m,n,2*m):
+                isprime[j/2]=False
+        i+=1        
+    cnt=0            
+    for i in xrange(last+1):
+        if isprime[i]==True:
+            cnt+=(2*i+1)
+            
+    return cnt+2     
+    
+n=2000000
+ans=sieve(n)
+ 
+print ans
