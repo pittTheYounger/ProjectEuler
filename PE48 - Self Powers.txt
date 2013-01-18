@@ -1,0 +1,24 @@
+sum=0
+mod=10000000000
+ 
+def moduloPower(a,b):
+        x=1
+        y=a
+        while b>0:
+                if b%2==1:
+                        x=(x*y)%mod
+                y=(y*y)%mod
+                b/=2
+        
+        return x%mod
+                                
+        
+                
+                
+ 
+for i in xrange(1,1000):
+        sum=(sum+moduloPower(i,i))%mod
+ 
+ 
+ 
+print sum
