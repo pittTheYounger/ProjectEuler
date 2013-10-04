@@ -1,0 +1,40 @@
+
+
+L = []
+for i in xrange(0,100):
+	L.append(raw_input())
+
+first_ten = [0]*10
+
+j = 49
+
+psum = 0
+
+
+while j>=0:
+	
+	for x in L:			
+		psum += int(x[j])
+ 		
+	
+	if psum > 9:
+		m = psum % 10
+		psum /= 10
+		if j <= 9:
+			first_ten[j] = m
+	j-=1
+
+ans = ''
+if psum > 0:
+	 st = str(psum)
+	 first_ten = first_ten[0:10-len(st)] 
+	 ans += st
+
+
+k = 0
+while len(ans) < 10:
+	ans += str(first_ten[k])
+	k += 1
+		
+print ans
+	
