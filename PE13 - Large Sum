@@ -1,5 +1,4 @@
 
-
 L = []
 for i in xrange(0,100):
 	L.append(raw_input())
