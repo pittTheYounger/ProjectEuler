@@ -1,0 +1,57 @@
+#include<iostream>
+#include<vector>
+#include<cstring>
+
+using namespace std;
+
+bool isprime[1000010];
+//only 80000 primes less than 1 million
+long long cum[80000] = {0};
+int len;
+
+void sieve() {	
+	isprime[0] = false;
+	isprime[1] = false;
+	for(int i=2;i*i<=1000000;i++) {
+		if(isprime[i]) {
+			for(int j=2*i;j<=1000000;j+=i)
+				isprime[j] = false;
+		}
+	}
+
+	long long sum = 0;
+	int k = 0;
+	
+	for(int i=2;i<=1000000;i++){
+		if(isprime[i]) {
+			sum += i;	
+					
+			cum[k+1] = sum;
+			k++;			
+		}				
+	}	
+	
+	len = k;
+}
+
+int main() {
+
+	memset(isprime,1,sizeof(isprime));
+	sieve();
+	long long diff = 0;
+
+	for(int i=len-1;i>0;i--)
+		for(int j=1;j+i-1<len;j++) {
+			diff = cum[j+i-1] - cum[j-1];	
+			
+			if(diff > 1000000) break;
+			if(isprime[diff]) {
+				cout<<diff<<" "<<i<<endl;
+				return 0;
+			}
+  }
+	
+
+
+	return 0;
+}
