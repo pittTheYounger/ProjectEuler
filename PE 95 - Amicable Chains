@@ -1,0 +1,63 @@
+#include <iostream>
+#include <cstring>
+#include <unordered_map>
+using namespace std;
+
+bool cache[1000010] = {0};
+int S[1000010] = {0};
+
+void computeSum() {
+	
+	for(int i = 1;i<=500000;i++) {
+		for(int j = 2*i;j<=1000000;j+=i)
+			S[j] += i;
+	}
+
+
+}
+
+int main() {	
+	int maxLen = 0;
+	int smallest = 0;
+	cache[0] = cache[1] = true;
+	
+	computeSum();
+	
+	for(int i = 2;i <= 1000000;i++) {
+		
+		if(cache[i]) continue;
+
+		int j = i;
+		int len = 1;
+	    
+		unordered_map<int,int> chain;
+		unordered_map<int,int>::iterator itr;
+
+		while(true) {
+		  j = S[j];	
+		  	
+		  if(j > 1000000 || j < i)
+			break;
+		  else if((itr = chain.find(j)) != chain.end()) {
+			len -= itr->second + 1;
+			if(len > maxLen) {
+				smallest = j;
+				maxLen = len;
+			}		
+			break;		
+		  }
+		  else if(j == i) {
+			if(len > maxLen) {
+				smallest = i;
+				maxLen = len;
+			}
+			break;		 	
+		  }		
+		  cache[j] = true;
+		  chain[j] = len+1;
+		  len++;	
+		}
+	}
+	cout<<smallest<<" "<<maxLen<<endl;
+	return 0;
+}
