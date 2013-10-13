@@ -22,13 +22,14 @@ int main()
 		
 		int penta = 1;
 
+		// using Euler pentagonal theorem - recurrence for P(n)
 		while(penta <= n) {			
 			
 			int sign = (i % 4 > 1)?-1:1;
-			P[n] = (P[n] +  sign*P[n-penta]) % MOD;
+			P[n] = (P[n] +  sign*P[n-penta]) % MOD; 
 			i += 1;
-			int k = (i%2 == 0)?(i / 2 + 1) : -(i / 2 + 1) ;
-		    penta = k*(3*k-1)/2;
+			int k = (i%2 == 0)?(i / 2 + 1) : -(i / 2 + 1) ; // k for ith generalized pentagonal number
+		    penta = k*(3*k-1)/2; 
 		}
 		
 		if(P[n] == 0) {
