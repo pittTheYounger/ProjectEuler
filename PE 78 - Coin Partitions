@@ -1,0 +1,43 @@
+#include <iostream>
+#include <cstring>
+#define MOD 1000000
+
+using namespace std;
+
+int P[100000];
+
+int main() 
+{
+
+	
+	memset(P,0,sizeof P);
+	P[0] = 1;
+
+	int n = 1;
+
+	while(true) {
+
+		
+		int i = 0;
+		
+		int penta = 1;
+
+		while(penta <= n) {			
+			
+			int sign = (i % 4 > 1)?-1:1;
+			P[n] = (P[n] +  sign*P[n-penta]) % MOD;
+			i += 1;
+			int k = (i%2 == 0)?(i / 2 + 1) : -(i / 2 + 1) ;
+		    penta = k*(3*k-1)/2;
+		}
+		
+		if(P[n] == 0) {
+			cout<<n<<endl;
+			break;
+		}
+		
+		n += 1;
+	}
+
+	return 0;
+}
